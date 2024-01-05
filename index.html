@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Italic, sans-serif;
+            
+            background-color: skyblue;            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #todo-container {
+            background-color:pink   ;    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        #todo-header {
+            background-color: yellow;            color: black ;
+            padding: 10px;
+            text-align: center;
+        }
+
+        #todo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            padding: 10px;
+            border-bottom: 1px solid blueviolet;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .todo-item input {
+            margin-right: 10px;
+        }
+
+        #add-todo {
+            padding: 10px;
+            text-align: center;
+        }
+
+        #add-todo input {
+            padding: 5px;
+            width: 60%;
+        }
+
+        #add-todo button {
+            padding: 5px 10px;
+            background-color: Orange ;
+            color: black ;            border: none;
+            cursor: pointer;
+        }
+        
+    </style>
+    <title>To-Do List</title>
+</head>
+<body>
+
+<div id="todo-container">
+    <div id="todo-header">
+        <h2>To-Do List</h2>
+    </div>
+    <ul id="todo-list"></ul>
+    <div id="add-todo">
+        <input type="text" id="new-task" placeholder="Add a new task">
+        <button onclick="addTask()">Add</button>
+    </div>
+</div>
+
+<script>
+    function addTask() {
+        var newTaskInput = document.getElementById("new-task");
+        var taskText = newTaskInput.value.trim();
+
+        if (taskText !== "") {
+            var todoList = document.getElementById("todo-list");
+
+            var listItem = document.createElement("li");
+            listItem.className = "todo-item";
+
+            var checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+
+            var taskLabel = document.createElement("span");
+            taskLabel.textContent = taskText;
+
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = function () {
+                todoList.removeChild(listItem);
+            };
+
+            listItem.appendChild(checkbox);
+            listItem.appendChild(taskLabel);
+            listItem.appendChild(deleteButton);
+
+            todoList.appendChild(listItem);
+
+            newTaskInput.value = "";
+        }
+    }
+</script>
+
+</body>
+</html> 
